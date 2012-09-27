@@ -1,0 +1,16 @@
+{
+    "contents" : "\ncomplete <- function(directory, id = 1:332) {\n  ## 'directory' is a character vector of length 1 indicating\n  ## the location of the CSV files\n  \n  ## 'id' is an integer vector indicating the monitor ID numbers\n  ## to be used\n  \n  ## Return a data frame of the form:\n  ## id nobs\n  ## 1  117\n  ## 2  1041\n  ## ...\n  ## where 'id' is the monitor ID number and 'nobs' is the\n  ## number of complete cases \n  files <- list.files( path = directory )[id]\n  files <- files[!is.na(files)]\n  \n  id <- c()\n  nobs <- c() \n  \n  for(f in 1:length(files)){\n    data <- read.csv( paste(directory, \"/\", files[f], sep=\"\") )\n    id = c(id, f)                       # append to vector\n    nobs = c(nobs, nrow(na.omit(data))) # append to vector, num rows, omit NA\n  }\n  return( data.frame(id=id, nobs=nobs) )\n}",
+    "created" : 1348732331671.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1213055420",
+    "id" : "5C61782B",
+    "lastKnownWriteTime" : 1348735138,
+    "path" : "~/Projects/BigToast/comp-data-r/assign-1/complete.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
