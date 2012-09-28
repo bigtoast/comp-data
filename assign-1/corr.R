@@ -9,4 +9,17 @@ corr <- function(directory, threshold = 0) {
   ## nitrate and sulfate; the default is 0
   
   ## Return a numeric vector of correlations
+  files <- list.files( path = directory )
+
+  cr <- c() 
+  
+  for(f in 1:length(files)){
+    data <- read.csv( paste(directory, "/", files[f], sep="") )
+    data <- data[complete.cases(data),]
+    if ( nrow(data) > threshold ) {
+      cr <- c(cr, cor(data$sulfate, data$nitrate) ) # append corralations
+    }
+  }
+  
+  return( cr )
 }
